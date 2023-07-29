@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row mb-4">
+    <div class="card">
+      <div class="card-body">
+        <!--<h5 class="card-title">Search</h5>-->
+
+        <app-referral-filter (searchEvent)="handleSearchEvent($event)"></app-referral-filter>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Records</h5>
+        <app-referral-records [referralRecord]="referralRecord"></app-referral-records>
+      </div>
+    </div>
+  </div>
+
+</div>
