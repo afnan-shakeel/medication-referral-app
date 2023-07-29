@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class ReferralViewComponent {
   referralRecord = []
-  handleSearchEvent(data: any){
 
+  handleSearchEvent(data: any){
     console.log('recieved to parent', data)
     this.referralRecord = data
   }

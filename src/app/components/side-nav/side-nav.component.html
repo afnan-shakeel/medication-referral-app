@@ -5,7 +5,7 @@
         <li class="nav-item nav-item-custom mb-2" *ngFor="let item of menu">
           <a href={{item.path}} class="nav-link" style="color:#2E8A99;">
             <i class={{item.icon}}></i>
-            <span *ngIf="isMenuOpen" class="mx-2">{{" " + item.title + " "}}</span>
+            <span *ngIf="isMenuOpen" class="text-justify font-weight-bold m-4">{{" " + item.title + " "}}</span>
           </a>
         </li>
       </ul>

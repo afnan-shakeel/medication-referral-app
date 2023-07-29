@@ -12,4 +12,8 @@ export class ReferralFilterComponent {
     this.data = [{name:'name',id:1, email:'asd@zxc'}]
     this.searchEvent.emit(this.data)
   }
+  reset(){
+    this.data = []
+    this.searchEvent.emit(this.data)
+  }
 }
