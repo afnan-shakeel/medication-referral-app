@@ -1,22 +1,27 @@
 <div class="container">
-    <table class="table table-bordered">
+  <div class="table-responsive-sm">
+    <table class="table table-sm table-hover" style="">
       <thead>
         <tr>
-          <th>Online ID</th>
-          <th>Referral From</th>
-          <th>Referral To</th>
-          <th>Patient Id</th>
-          <th>Patient Name</th>
-          <th>Mobile</th>
-          <th>Referral Status</th>
+          <th scope="col">Online ID</th>
+          <th scope="col">Referral From</th>
+          <th scope="col">Referral To</th>
+          <th scope="col">Patient Id</th>
+          <th scope="col">Patient Name</th>
+          <th scope="col">Referral Status</th>
+          <th scope="col">Response Status</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of referralRecord">
-          <td>{{item.id}}</td>
-          <td>{{item.name}}</td>
-          <td>{{item.email}}</td>
-          <td>30</td>
+        <tr *ngFor="let item of filterTableRecords">
+          <td>{{item.onlineId}}</td>
+          <td>{{item.fromEstName}}</td>
+          <td>{{item.toEstName}}</td>
+          <td>{{item.patientId}}</td>
+          <td>{{item.patientName}}</td>
+          <td>{{item.referralStatus}}</td>
+          <td>{{item.responseStatus}}</td>
           <td>
             <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
             <button class="btn btn-sm "><i class="fas fa-trash-alt"></i></button>
@@ -24,21 +29,18 @@
         </tr>
       </tbody>
     </table>
-    
-    <div *ngIf="referralRecord.length>0" class="d-flex justify-content-between p-2">
-        <ngb-pagination
-            [collectionSize]="collectionSize"
-            [(page)]="page"
-            [pageSize]="pageSize"
-            (pageChange)="refreshCountries()"
-        >
-        </ngb-pagination>
-    
-        <select class="form-select" style="width: auto" ngModel="pageSize" (ngModelChange)="refreshCountries()">
-            <option ngValue="2">2 items per page</option>
-            <option ngValue="4">4 items per page</option>
-            <option ngValue="6">6 items per page</option>
-        </select>
+  </div>
+  <div *ngIf="referralRecord.length>0" class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshRows()"
+      size="sm">
+    </ngb-pagination>
+    <div class="form-group">
+      <select class="form-select form-select-sm" style="width: auto" [(ngModel)]="pageSize"
+        (ngModelChange)="refreshRows()">
+        <option value="2">2 items per page</option>
+        <option value="4">4 items per page</option>
+        <option value="6">6 items per page</option>
+      </select>
     </div>
   </div>
-  
+</div>

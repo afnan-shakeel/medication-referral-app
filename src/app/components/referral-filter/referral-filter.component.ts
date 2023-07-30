@@ -1,18 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { getAllEstablishments } from 'src/app/services/apis/referral';
 import { Observable, OperatorFunction } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormGroup, FormControl } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-
-const states = ['Alabama',
-  'Alaska',
-  'American Samoa',
-  'Arizona',
-  'Arkansas',
-  'California',
-  'Colorado',]
+import { ReferralApi } from 'src/app/services/apis/referral';
+import { AxiosService } from 'src/app/services/axios';
 
 @Component({
   selector: 'app-referral-filter',
@@ -20,10 +13,22 @@ const states = ['Alabama',
   styleUrls: ['./referral-filter.component.scss']
 })
 export class ReferralFilterComponent {
-  data: any[] = [];
-  establishments: any[] = [];
-  public selectedRefFrom: any;
-  public selectedRefTo: any;
+  constructor(private axiosService: AxiosService) { }
+  data: any = [];
+  establishments: any = [];
+  searchForm = new FormGroup({
+    fromEst: new FormControl(),
+    toEst: new FormControl(),
+    patientId: new FormControl(),
+    respStatus: new FormControl(),
+    refStatus: new FormControl(),
+  })
+  responseStatusValues = [
+    { title: "PENDING", value: "Pending" }, { title: "APPROVED", value: "Approved" }, { title: "REJECTED", value: "Rejected" }
+  ]
+  referralStatusValues = [
+    { title: "ACTIVE", value: "Active" }, { title: "CANCELLED", value: "Cancelled" }
+  ]
 
   ngOnInit(): void {
     this.fetchEstablishments()
@@ -34,25 +39,31 @@ export class ReferralFilterComponent {
       debounceTime(200),
       distinctUntilChanged(),
       map((term) =>
-        term.length < 2 ? [] : this.establishments.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
+        term.length < 2 ? [] : this.establishments.filter((v: any) => v.estName.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
       ),
     );
-
-  responseStatusValues = [
-    { title: "PENDING", value: "P" }, { title: "APPROVED", value: "A" }, { title: "REJECTED", value: "R" }
-  ]
-  referralStatusValues = [
-    { title: "ACTIVE", value: "A" }, { title: "CANCELLED", value: "C" }
-  ]
+  formatter = (x: { estName: string }) => x.estName;
 
   @Output() searchEvent = new EventEmitter
 
-  fetchEstablishments() {
-    const res = getAllEstablishments()
-    console.log(res)
+  async fetchEstablishments() {
+    const res = await this.axiosService.get({ url: '/getAllEstablishments' })
+    this.establishments = res
+    console.log('fetched est')
   }
-  search() {
-    this.data = [{ name: 'name', id: 1, email: 'asd@zxc' }]
+  async search() {
+    console.log(this.searchForm.value)
+    const payload = {
+      "fromEstId": this.searchForm.value.fromEst?.estCode || null,
+      "patientId": this.searchForm.value.patientId || null,
+      "refStatus": this.searchForm.value.refStatus || null,
+      "respStatus": this.searchForm.value.respStatus || null,
+      "toEstId": this.searchForm.value.toEst?.estCode || null
+    }
+    console.log('payload', payload)
+    const res = await this.axiosService.post({url:'/getAllMedRefWithParams',data: payload})
+    console.log('getAllMedRefWithParams res', res)
+    this.data = res
     this.searchEvent.emit(this.data)
   }
   reset() {

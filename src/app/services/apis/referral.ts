@@ -1,10 +1,12 @@
+import { Inject, Injectable } from "@angular/core";
 import { AxiosService } from "../axios";
 
-let axios: AxiosService ;
+@Inject
+export class ReferralApi{
+    
+    constructor(private axiosService: AxiosService){}
 
-const getAllEstablishments =async () => {
-    return await axios.get({url:'/getAllEstablishments'})
+    public getAllEstablishments = async () => {
+        return await this.axiosService.get({url:'/medicationReferal/getAllEstablishments'})
+    }
 }
-
-
-export { getAllEstablishments }

@@ -13,7 +13,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ReferralViewComponent } from './pages/referral-view/referral-view.component';
 import { ReferralFilterComponent } from './components/referral-filter/referral-filter.component';
 import { ReferralRecordsComponent } from './components/referral-records/referral-records.component';
-
+import { FormsModule,FormGroup,FormControl,ReactiveFormsModule  } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +30,9 @@ import { ReferralRecordsComponent } from './components/referral-records/referral
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    NgbTypeaheadModule
+    NgbTypeaheadModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
