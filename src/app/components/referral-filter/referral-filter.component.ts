@@ -7,12 +7,12 @@ import { JsonPipe } from '@angular/common';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 const states = ['Alabama',
-    'Alaska',
-    'American Samoa',
-    'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',]
+  'Alaska',
+  'American Samoa',
+  'Arizona',
+  'Arkansas',
+  'California',
+  'Colorado',]
 
 @Component({
   selector: 'app-referral-filter',
@@ -21,16 +21,23 @@ const states = ['Alabama',
 })
 export class ReferralFilterComponent {
   data: any[] = [];
-  
-  public modelx: any;
-  searchx: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
+  establishments: any[] = [];
+  public selectedRefFrom: any;
+  public selectedRefTo: any;
+
+  ngOnInit(): void {
+    this.fetchEstablishments()
+  }
+
+  searchEstablishment: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
       map((term) =>
-        term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
+        term.length < 2 ? [] : this.establishments.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
       ),
     );
+
   responseStatusValues = [
     { title: "PENDING", value: "P" }, { title: "APPROVED", value: "A" }, { title: "REJECTED", value: "R" }
   ]

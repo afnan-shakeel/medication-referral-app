@@ -2,17 +2,13 @@
     <form>
       <div class="row mb-2">
         <div class="col-3">
-                <label for="typeahead-basic">Referred From:</label>
-                <input id="typeahead-basic" type="text" class="form-control form-control-sm" ngModel="modelx" [ngbTypeahead]="searchx" />
+                <label for="referredFrom">Referred From:</label>
+                <input id="referredFrom" type="text" class="form-control form-control-sm" ngModel="selectedRefFrom" [ngbTypeahead]="searchEstablishment" />
         </div>
         <div class="col-3">
             <div class="form-group">
-                <label for="referredTo">Referred To</label>
-                <select class="form-select form-select-sm" id="referredTo" aria-label=".form-select-sm example">
-                    <option value="1"></option>
-                    <option value="2">xx</option>
-                    <option value="3">xx</option>
-                </select>
+                <label for="referredTo">Referred To:</label>
+                <input id="referredTo" type="text" class="form-control form-control-sm" ngModel="selectedRefTo" [ngbTypeahead]="searchEstablishment" />
             </div>
         </div>
         <div class="col-2">

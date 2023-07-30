@@ -2,10 +2,12 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>ID</th>
+          <th>Online ID</th>
           <th>Referral From</th>
           <th>Referral To</th>
           <th>Patient Id</th>
+          <th>Patient Name</th>
+          <th>Mobile</th>
           <th>Referral Status</th>
         </tr>
       </thead>
@@ -22,5 +24,21 @@
         </tr>
       </tbody>
     </table>
+    
+    <div *ngIf="referralRecord.length>0" class="d-flex justify-content-between p-2">
+        <ngb-pagination
+            [collectionSize]="collectionSize"
+            [(page)]="page"
+            [pageSize]="pageSize"
+            (pageChange)="refreshCountries()"
+        >
+        </ngb-pagination>
+    
+        <select class="form-select" style="width: auto" ngModel="pageSize" (ngModelChange)="refreshCountries()">
+            <option ngValue="2">2 items per page</option>
+            <option ngValue="4">4 items per page</option>
+            <option ngValue="6">6 items per page</option>
+        </select>
+    </div>
   </div>
   

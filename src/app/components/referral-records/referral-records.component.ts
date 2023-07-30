@@ -7,5 +7,11 @@ import { Component, Input } from '@angular/core';
 })
 export class ReferralRecordsComponent {
   @Input() referralRecord: any[] = []
-  
+  page = 1;
+	pageSize = 4;
+	collectionSize = 12;
+	refreshCountries() {
+    console.log('refersh table')
+  }
+
 }
