@@ -51,7 +51,9 @@ export class ReferralFilterComponent {
     this.establishments = res
     console.log('fetched est')
   }
+  loading = false
   async search() {
+    this.loading = true
     console.log(this.searchForm.value)
     const payload = {
       "fromEstId": this.searchForm.value.fromEst?.estCode || null,
@@ -61,12 +63,15 @@ export class ReferralFilterComponent {
       "toEstId": this.searchForm.value.toEst?.estCode || null
     }
     console.log('payload', payload)
-    const res = await this.axiosService.post({url:'/getAllMedRefWithParams',data: payload})
+    const res = await this.axiosService.post({ url: '/getAllMedRefWithParams', data: payload })
     console.log('getAllMedRefWithParams res', res)
     this.data = res
     this.searchEvent.emit(this.data)
+    this.loading = false
   }
   reset() {
+    // Object.keys(this.searchForm.value).forEach((x: string) => { this.searchForm.reset() })
+    this.searchForm.reset()
     this.data = []
     this.searchEvent.emit(this.data)
   }

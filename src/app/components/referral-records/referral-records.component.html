@@ -13,7 +13,7 @@
           <th scope="col">Actions</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="_referralRecord.length>0">
         <tr *ngFor="let item of filterTableRecords">
           <td>{{item.onlineId}}</td>
           <td>{{item.fromEstName}}</td>
@@ -23,9 +23,14 @@
           <td>{{item.referralStatus}}</td>
           <td>{{item.responseStatus}}</td>
           <td>
+            <button class="btn btn-sm "><i class="fas fa-info"></i></button>
             <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
-            <button class="btn btn-sm "><i class="fas fa-trash-alt"></i></button>
           </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="_referralRecord.length==0">
+        <tr>
+          <td colspan="8" class="text-center">No Data</td>
         </tr>
       </tbody>
     </table>

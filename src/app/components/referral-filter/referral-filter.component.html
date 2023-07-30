@@ -25,7 +25,8 @@
             <div class="col-2">
                 <div class="form-group">
                     <label for="respStatus">Response Status</label>
-                    <select class="form-select form-select-sm" formControlName="respStatus" id="respStatus" aria-label=".form-select-sm example">
+                    <select class="form-select form-select-sm" formControlName="respStatus" id="respStatus"
+                        aria-label=".form-select-sm example">
                         <option></option>
                         <option *ngFor="let item of responseStatusValues" value={{item.value}}>{{item.title}}</option>
                     </select>
@@ -34,7 +35,8 @@
             <div class="col-2">
                 <div class="form-group">
                     <label for="refStatus">Referral Status</label>
-                    <select class="form-select form-select-sm" formControlName="refStatus" id="refStatus" aria-label=".form-select-sm example">
+                    <select class="form-select form-select-sm" formControlName="refStatus" id="refStatus"
+                        aria-label=".form-select-sm example">
                         <option></option>
                         <option *ngFor="let item of referralStatusValues" value={{item.value}}>{{item.title}}</option>
                     </select>
@@ -43,8 +45,10 @@
         </div>
         <div class="row">
             <div class="col mt-3 d-flex justify-content-end">
-                <button type="button" class="btn btn-sm btn-secondary mx-2 ml-auto" (click)="reset()">Reset</button>
-                <button type="button" class="btn btn-sm btn-primary" (click)="search()">Search</button>
+                <button type="button" class="btn btn-sm btn-outline-primary mx-2 ml-auto" (click)="reset()" >Reset</button>
+                <button type="button" class="btn btn-sm btn-primary" (click)="search()">{{loading===false ? "Search" : ""}}
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
     </form>
