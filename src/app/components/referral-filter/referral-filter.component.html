@@ -1,62 +1,52 @@
 <div class="container">
     <form>
-      <!-- First row of inputs -->
       <div class="row mb-2">
         <div class="col-3">
-          <div class="input-group-sm">
-            <label for="onlineId">Online Id</label>
-            <input class="form-control" id="onlineId" aria-describedby="emailHelp">
-          </div>
+                <label for="typeahead-basic">Referred From:</label>
+                <input id="typeahead-basic" type="text" class="form-control form-control-sm" ngModel="modelx" [ngbTypeahead]="searchx" />
         </div>
-        <div class="col-3">
-          <div class="input-group-sm">
-            <label for="estId">Establishment Id</label>
-            <input type="email" class="form-control" id="estId" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="input-group-sm">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="input-group-sm">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
-          </div>
-        </div>
-      </div>
-  
-      <!-- Second row of inputs -->
-      <div class="row mb-3">
         <div class="col-3">
             <div class="form-group">
-            <label for="selectLabel">Select</label>
-            <select class="form-select" id="selectLabel" aria-label=".form-select-sm example">
-                <option value="1">APPROVED</option>
-                <option value="2">CANCELED</option>
-              </select>
+                <label for="referredTo">Referred To</label>
+                <select class="form-select form-select-sm" id="referredTo" aria-label=".form-select-sm example">
+                    <option value="1"></option>
+                    <option value="2">xx</option>
+                    <option value="3">xx</option>
+                </select>
             </div>
         </div>
-        <div class="col-3">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+        <div class="col-2">
+          <div class="input-group-sm">
+            <label for="patientId">Patient Id</label>
+            <input type="email" class="form-control" id="patientId" aria-describedby="emailHelp" >
           </div>
         </div>
-        <div class="col-3">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
-          </div>
+
+        <div class="col-2">
+            <div class="form-group">
+                <label for="referralStatus">Response Status</label>
+                <select class="form-select form-select-sm" id="referralStatus" aria-label=".form-select-sm example">
+                    <option></option>
+                    <option *ngFor="let item of responseStatusValues" value={{item.value}}>{{item.title}}</option>
+                </select>
+            </div>
         </div>
-        <div class="col-3 mt-3">
-            <button type="button" class="btn btn-secondary mx-2" (click)="reset()">Reset</button>
-            <button type="button" class="btn btn-primary" (click)="search()">Search</button>
+        <div class="col-2">
+            <div class="form-group">
+                <label for="referralStatus">Referral Status</label>
+                <select class="form-select form-select-sm" id="referralStatus" aria-label=".form-select-sm example">
+                    <option></option>
+                    <option *ngFor="let item of referralStatusValues" value={{item.value}}>{{item.title}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mt-3 d-flex justify-content-end">
+            <button type="button" class="btn btn-sm btn-secondary mx-2 ml-auto" (click)="reset()">Reset</button>
+            <button type="button" class="btn btn-sm btn-primary" (click)="search()">Search</button>
         </div>
       </div>
-  
     </form>
   </div>
   
