@@ -1,7 +1,7 @@
 import { Component, Input, AfterContentInit } from '@angular/core';
-import { Observable } from 'rxjs';
-
+// import { Observable } from 'rxjs';
 import { CellClickedEvent, ColDef, GridReadyEvent, GridApi, ColumnApi,IDetailCellRendererParams } from 'ag-grid-community';
+
 interface referralData {
   onlineId: number;
   fromEstName: string;
@@ -60,10 +60,6 @@ export class ReferralRecordsComponent {
 
   };
   xpageSize: number = 8;
-  // Example of consuming Grid Event
-  onCellClicked(e: CellClickedEvent): void {
-    console.log('cellClicked', e)
-  }
 
   autoSizeAll(skipHeader: boolean) {
     const allColumnIds: string[] = [];
@@ -76,19 +72,7 @@ export class ReferralRecordsComponent {
     params.api.sizeColumnsToFit();
   }
 
-  public detailCellRendererParams: any = {
-    // provide the Grid Options to use on the Detail Grid
-    detailGridOptions: {
-      columnDefs: [
-        { field: 'responseStatus' },
-      ]
-    },
-
-    // get the rows for each Detail Grid
-    getDetailRowData: (params: any) => {
-      params.successCallback(params.data.callRecords);
-    }
-  } as IDetailCellRendererParams<referralData, referralDetail>; 
+  columns = [{ prop: 'onlineId' }, { name: 'Patient Id' }, { name: 'Patient Name' },{ name: 'Reffered from ' }, { name: 'Referred To' }, { name: 'Referral status' }, { name: 'Response Status' }];
   
   refreshRows() {
     this.pageSize = Number(this.pageSize)

@@ -1,11 +1,23 @@
 <div class="container">
+
   <div>
-  <!-- AG Grid Angular Component -->
-  <ag-grid-angular style="width: 1050px; height: 500px" class="ag-theme-alpine" 
-  
-    [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="referralRecord"
-    [pagination]="true" [paginationAutoPageSize]="true" [paginationPageSize]="xpageSize"
-    [masterDetail]="true" [detailCellRendererParams]="detailCellRendererParams"></ag-grid-angular>
+    <ngx-datatable class="material" [rows]="referralRecord" [columns]="columns"
+       [rowHeight]="50" [headerHeight]="50" [columnMode]="'force'" [limit]="10" [footerHeight]="50"  
+       > 
+    </ngx-datatable>
+    <ngx-datatable-row-detail [rowHeight]="getHeight" #myDetailRow (toggle)="onDetailToggle($event)">
+      <ng-template let-row="row" ngx-datatable-row-detail-template>
+        <div><strong>Address</strong></div>
+        <div>{{row.address.city}}, {{row.address.state}}</div>
+      </ng-template>
+    </ngx-datatable-row-detail>  </div>
+
+  <div *ngIf="false">
+    <ag-grid-angular style="width: 1050px; height: 500px" class="ag-theme-alpine" 
+    
+      [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="referralRecord"
+      [pagination]="true" [paginationAutoPageSize]="true" [paginationPageSize]="xpageSize"
+      ></ag-grid-angular>
   </div>
 
   <div *ngIf="false">

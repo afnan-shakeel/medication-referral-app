@@ -18,3 +18,8 @@ $theme-colors: (
 @import 'ag-grid-community/styles/ag-grid.css';
 @import 'ag-grid-community/styles/ag-theme-alpine.css';
 
+@import 'node_modules/@swimlane/ngx-datatable/index.scss';
+@import 'node_modules/@swimlane/ngx-datatable/themes/material.scss';
+@import 'node_modules/@swimlane/ngx-datatable/themes/dark.scss';
+@import 'node_modules/@swimlane/ngx-datatable/themes/bootstrap.scss';
+@import 'node_modules/@swimlane/ngx-datatable/assets/icons.css';

@@ -15,6 +15,9 @@ import { ReferralViewComponent } from './pages/referral-view/referral-view.compo
 import { ReferralFilterComponent } from './components/referral-filter/referral-filter.component';
 import { ReferralRecordsComponent } from './components/referral-records/referral-records.component';
 import { FormsModule,FormGroup,FormControl,ReactiveFormsModule  } from '@angular/forms';
+
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +37,8 @@ import { FormsModule,FormGroup,FormControl,ReactiveFormsModule  } from '@angular
     NgbTypeaheadModule,
     FormsModule,
     ReactiveFormsModule,
-    AgGridModule
+    AgGridModule,
+    NgxDatatableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
