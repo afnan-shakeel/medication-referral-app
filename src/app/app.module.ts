@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,7 +33,8 @@ import { FormsModule,FormGroup,FormControl,ReactiveFormsModule  } from '@angular
     NgbModule,
     NgbTypeaheadModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgGridModule
   ],
   providers: [],
   bootstrap: [AppComponent]

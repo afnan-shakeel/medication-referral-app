@@ -1,51 +1,62 @@
 <div class="container">
-  <div class="table-responsive-sm">
-    <table class="table table-sm table-hover" style="">
-      <thead>
-        <tr>
-          <th scope="col">Online ID</th>
-          <th scope="col">Referral From</th>
-          <th scope="col">Referral To</th>
-          <th scope="col">Patient Id</th>
-          <th scope="col">Patient Name</th>
-          <th scope="col">Referral Status</th>
-          <th scope="col">Response Status</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody *ngIf="_referralRecord.length>0">
-        <tr *ngFor="let item of filterTableRecords">
-          <td>{{item.onlineId}}</td>
-          <td>{{item.fromEstName}}</td>
-          <td>{{item.toEstName}}</td>
-          <td>{{item.patientId}}</td>
-          <td>{{item.patientName}}</td>
-          <td>{{item.referralStatus}}</td>
-          <td>{{item.responseStatus}}</td>
-          <td>
-            <button class="btn btn-sm "><i class="fas fa-info"></i></button>
-            <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
-          </td>
-        </tr>
-      </tbody>
-      <tbody *ngIf="_referralRecord.length==0">
-        <tr>
-          <td colspan="8" class="text-center">No Data</td>
-        </tr>
-      </tbody>
-    </table>
+  <div>
+  <!-- AG Grid Angular Component -->
+  <ag-grid-angular style="width: 1050px; height: 500px" class="ag-theme-alpine" 
+  
+    [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [rowData]="referralRecord"
+    [pagination]="true" [paginationAutoPageSize]="true" [paginationPageSize]="xpageSize"
+    [masterDetail]="true" [detailCellRendererParams]="detailCellRendererParams"></ag-grid-angular>
   </div>
-  <div *ngIf="referralRecord.length>0" class="d-flex justify-content-between p-2">
-    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshRows()"
-      size="sm">
-    </ngb-pagination>
-    <div class="form-group">
-      <select class="form-select form-select-sm" style="width: auto" [(ngModel)]="pageSize"
-        (ngModelChange)="refreshRows()">
-        <option value="2">2 items per page</option>
-        <option value="4">4 items per page</option>
-        <option value="6">6 items per page</option>
-      </select>
+
+  <div *ngIf="false">
+    <div class="table-responsive-sm">
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Online ID</th>
+            <th scope="col">Referral From</th>
+            <th scope="col">Referral To</th>
+            <th scope="col">Patient Id</th>
+            <th scope="col">Patient Name</th>
+            <th scope="col">Referral Status</th>
+            <th scope="col">Response Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="_referralRecord.length>0">
+          <tr *ngFor="let item of filterTableRecords">
+            <td>{{item.onlineId}}</td>
+            <td>{{item.fromEstName}}</td>
+            <td>{{item.toEstName}}</td>
+            <td>{{item.patientId}}</td>
+            <td>{{item.patientName}}</td>
+            <td>{{item.referralStatus}}</td>
+            <td>{{item.responseStatus}}</td>
+            <td>
+              <button class="btn btn-sm "><i class="fas fa-info"></i></button>
+              <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="_referralRecord.length==0">
+          <tr>
+            <td colspan="8" class="text-center">No Data</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="referralRecord.length>0" class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+        (pageChange)="refreshRows()" size="sm">
+      </ngb-pagination>
+      <div class="form-group">
+        <select class="form-select form-select-sm" style="width: auto" [(ngModel)]="pageSize"
+          (ngModelChange)="refreshRows()">
+          <option value="2">2 items per page</option>
+          <option value="4">4 items per page</option>
+          <option value="6">6 items per page</option>
+        </select>
+      </div>
     </div>
   </div>
 </div>

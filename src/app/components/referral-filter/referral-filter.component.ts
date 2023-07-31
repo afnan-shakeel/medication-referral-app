@@ -54,7 +54,6 @@ export class ReferralFilterComponent {
   loading = false
   async search() {
     this.loading = true
-    console.log(this.searchForm.value)
     const payload = {
       "fromEstId": this.searchForm.value.fromEst?.estCode || null,
       "patientId": this.searchForm.value.patientId || null,

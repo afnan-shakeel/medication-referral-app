@@ -3,7 +3,7 @@
 <nav [style.width]="getMenuWidth()" [ngStyle]="{ 'overflow': isMenuOpen ? 'auto' : 'hidden' }">
     <ul class="nav nav-pills flex-column">
         <li class="nav-item nav-item-custom mb-2" *ngFor="let item of menu">
-          <a href={{item.path}} class="nav-link" style="color:#2E8A99;">
+          <a href={{item.path}} class="nav-link" style="color:#146C94;">
             <i class={{item.icon}}></i>
             <span *ngIf="isMenuOpen" class="text-justify font-weight-bold m-4">{{" " + item.title + " "}}</span>
           </a>
