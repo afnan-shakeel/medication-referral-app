@@ -1,20 +1,27 @@
-<div class="container">
-  <div class="row mb-4">
-    <div class="card">
-      <div class="card-body">
-        <h6 class="card-title mb-2">Search Referral</h6>
-        <!-- <hr> -->
+<div class="mx-2">
 
-        <app-referral-filter (searchEvent)="handleSearchEvent($event)"></app-referral-filter>
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card"  >
+        <div class="card-body w-100" >
+          <h6 class="card-title mb-2">Search for Medication Referral</h6>
+          <hr>
+          <div> 
+          <app-referral-filter (searchEvent)="handleSearchEvent($event)"></app-referral-filter>
+        </div>
+      </div>
       </div>
     </div>
   </div>
   
   <div class="row">
-    <div class="card">
-      <div class="card-body">
-        <h6 class="card-title">Records</h6>
-        <app-referral-records [referralRecord]="referralRecord"></app-referral-records>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title">Medication Referral Records</h6>
+          <hr>
+          <app-referral-records [referralRecord]="referralRecord"></app-referral-records>
+        </div>
       </div>
     </div>
   </div>

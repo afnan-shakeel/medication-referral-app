@@ -1,2 +1,42 @@
-@import 'ag-grid-community/styles/ag-grid.css';
-@import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+/* Theme 1: Light theme */
+.theme-light {
+    // background-color: #f7feff;
+    color: #333333;
+  }
+  
+  .theme-light  ::ng-deep .datatable-header {
+    padding-top: 10px;
+    background-color: #f9f9f9;
+    // background-color: #f9f9f9;
+    color: #333333;
+  }
+  
+  .theme-light  ::ng-deep .datatable-row {
+    border-bottom: 1px solid #333333;
+  }
+  
+  .theme-light  ::ng-deep .datatable-body {
+    background-color: #fffefe;
+    // background-color: #fffefe;
+  }
+
+
+  /* Theme 2: Dark theme */
+  .theme-dark {
+    background-color: #333333;
+    color: #ffffff;
+  }
+  
+  .theme-dark .datatable-header {
+    background-color: #555555;
+    color: #ffffff;
+  }
+  
+  .theme-dark .datatable-row {
+    border-bottom: 1px solid #777777;
+  }
+  
+  .theme-dark .datatable-body {
+    background-color: #444444;
+  }

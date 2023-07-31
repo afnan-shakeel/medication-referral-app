@@ -1,16 +1,86 @@
-<div class="container">
+<div class="p-2">
 
   <div>
-    <ngx-datatable class="material" [rows]="referralRecord" [columns]="columns"
+    <ngx-datatable #referralTable  [rows]="rows" [columns]="columns"
        [rowHeight]="50" [headerHeight]="50" [columnMode]="'force'" [limit]="10" [footerHeight]="50"  
-       > 
-    </ngx-datatable>
-    <ngx-datatable-row-detail [rowHeight]="getHeight" #myDetailRow (toggle)="onDetailToggle($event)">
-      <ng-template let-row="row" ngx-datatable-row-detail-template>
-        <div><strong>Address</strong></div>
-        <div>{{row.address.city}}, {{row.address.state}}</div>
+       [ngClass]="{
+        'bootstrap': true,  
+        'theme-light': true,
+      }"> 
+      <ngx-datatable-row-wrapper *ngx-datatable-row="let row; columns: columns;"
+      [ngClass]="{
+        'theme-light': true, 
+      }">
+    </ngx-datatable-row-wrapper>
+    <ngx-datatable-row-detail [rowHeight]="100" #referralDetailRow (toggle)="onDetailToggle($event)">
+      <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+        <div style="padding-left:35px;">
+          <div><strong>Details</strong></div>
+          <div>{{ "details of " + row.patientName }}</div>
+        </div>
       </ng-template>
-    </ngx-datatable-row-detail>  </div>
+    </ngx-datatable-row-detail>
+  
+        <!-- Column Templates -->
+        <ngx-datatable-column
+          [width]="50"
+          [resizeable]="false"
+          [sortable]="false"
+          [draggable]="false"
+          [canAutoResize]="false"
+        >
+          <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            <a
+
+              [class.datatable-icon-right]="!expanded"
+              [class.datatable-icon-down]="expanded"
+              title="Expand/Collapse Row"
+              (click)="toggleExpandRow(row)"
+            >
+            </a>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Online Id" [width]="30">
+          <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            <strong>{{ row.onlineId }}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Patient Id" [width]="30">
+          <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            <strong>{{ row.patientId }}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Patient Name" [width]="150">
+          <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            <strong>{{ row.patientName }}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Referred From" [width]="120">
+          <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            <strong>{{ row.fromEstName }}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Referred To" [width]="120">
+          <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            <strong>{{ row.toEstName }}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Referral Status" [width]="50">
+          <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            <strong>{{ row.refStatus }}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Response Status" [width]="50">
+          <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            <strong>{{ row.respStatus }}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+
+    </ngx-datatable>
+
+
+  </div>
 
   <div *ngIf="false">
     <ag-grid-angular style="width: 1050px; height: 500px" class="ag-theme-alpine" 
