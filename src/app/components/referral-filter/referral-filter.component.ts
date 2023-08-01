@@ -39,7 +39,7 @@ export class ReferralFilterComponent {
       debounceTime(200),
       distinctUntilChanged(),
       map((term) =>
-        term.length < 2 ? [] : this.establishments.filter((v: any) => v.estName.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
+        this.establishments.filter((v: any) => v.estName.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
       ),
     );
   formatter = (x: { estName: string }) => x.estName;

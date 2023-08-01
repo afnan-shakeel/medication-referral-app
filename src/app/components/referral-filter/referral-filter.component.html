@@ -39,7 +39,7 @@
                         <option *ngFor="let item of referralStatusValues" value={{item.value}}>{{item.title}}</option>
                     </select>
             </div>
-            <div class="col-auto mt-4 d-flex ">
+            <div class="col-auto mt-4">
                 <button type="button" class="btn btn-sm btn-outline-primary mx-2 ml-auto" (click)="reset()" >Reset</button>
                 <button type="button" class="btn btn-sm btn-primary" (click)="search()">{{loading===false ? "Search" : ""}}
                     <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

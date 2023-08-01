@@ -1,17 +1,18 @@
 .topbar{
-    // position: absolute;
+  position: relative;
     background-color: #164B60;
-    z-index: 1001;
+    z-index: 2000;
 }
 .sidebar {
-    // height: 100vh;
-    z-index: 1000;
-    position: absolute;
+    height: 100vh;
+    top: 0px;
+    z-index: 20;
+    position: fixed;
     background-color: #f0f0f0;
   }
   .main-content {
     padding: 20px;
-    height: 100vh;
+    min-height: 100vh;
     // width: 50px;
     margin-left: 50px;
     background-color:#f5f9fa;
