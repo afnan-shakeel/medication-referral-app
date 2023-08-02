@@ -15,6 +15,7 @@ import { ReferralRecordsComponent } from './components/referral-records/referral
 import { FormsModule,FormGroup,FormControl,ReactiveFormsModule  } from '@angular/forms';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ReferralDetailViewComponent } from './components/referral-detail-view/referral-detail-view.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     DashboardComponent,
     ReferralViewComponent,
     ReferralFilterComponent,
-    ReferralRecordsComponent
+    ReferralRecordsComponent,
+    ReferralDetailViewComponent
   ],
   imports: [
     BrowserModule,

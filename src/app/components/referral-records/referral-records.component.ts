@@ -1,7 +1,8 @@
-import { Component, Input, AfterContentInit,ViewChild } from '@angular/core';
+import { Component, Input, AfterContentInit,ViewChild, EventEmitter, Output } from '@angular/core';
 // import { Observable } from 'rxjs';
 import { CellClickedEvent, ColDef, GridReadyEvent, GridApi, ColumnApi,IDetailCellRendererParams } from 'ag-grid-community';
-
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AxiosService } from 'src/app/services/axios';
 interface referralData {
   onlineId: number;
   fromEstName: string;
@@ -11,9 +12,6 @@ interface referralData {
   referralStatus: string;
   responseStatus: string;
 }
-interface referralDetail {
-  responseStatus: string;
-}
 @Component({
   selector: 'app-referral-records',
   templateUrl: './referral-records.component.html',
@@ -21,9 +19,9 @@ interface referralDetail {
 })
 
 export class ReferralRecordsComponent {
-  private gridApi!: GridApi<referralData>;
-  private gridColumnApi!: ColumnApi;
+  constructor(config: NgbModalConfig, private modalService: NgbModal, private axiosService: AxiosService){
 
+  }
 
 
   _referralRecord: any[] = [];
@@ -31,6 +29,9 @@ export class ReferralRecordsComponent {
   page = 1;
   pageSize: number = 4;
   collectionSize = this._referralRecord.length;
+  openMedDtl: boolean = false
+  currentPage = 0
+  @Output() referralDtl: any;
 
 
 
@@ -38,40 +39,12 @@ export class ReferralRecordsComponent {
   set referralRecord(value: any) {
     this._referralRecord = value
     this.collectionSize = this._referralRecord.length;
-    this.refreshRows()
+    // this.refreshRows()
   }
   get referralRecord(): any {
     return this._referralRecord
   }
-  // ag grid 
-  public columnDefs: ColDef[] = [
-    { headerName: 'Online ID', field: 'onlineId', cellRenderer: 'agGroupCellRenderer', maxWidth: 150 },
-    { headerName: 'Patient Id', field: 'patientId', maxWidth: 150 },
-    { headerName: 'Patient Name', field: 'patientName', minWidth: 200 },
-    { headerName: 'Referral From', field: 'fromEstName', minWidth: 200 },
-    { headerName: 'Referral To', field: 'toEstName', minWidth: 200 },
-    { headerName: 'Referral Status', field: 'referralStatus', maxWidth: 150 },
-    { headerName: 'Response Status', field: 'responseStatus', maxWidth: 150 },
 
-  ];
-  public defaultColDef = {
-    sortable: true,
-    filter: true,
-    resizable: true
-
-  };
-  xpageSize: number = 8;
-
-  autoSizeAll(skipHeader: boolean) {
-    const allColumnIds: string[] = [];
-    this.gridColumnApi.getColumns()!.forEach((column) => {
-      allColumnIds.push(column.getId());
-    });
-    this.gridColumnApi.autoSizeColumns(allColumnIds, skipHeader);
-  }
-  sizeToFit(params: any) {
-    params.api.sizeColumnsToFit();
-  }
   // ngx-datatable
   @ViewChild('referralTable') table: any;
   rows = [
@@ -89,23 +62,39 @@ export class ReferralRecordsComponent {
     {"onlineId":"1004", "patientName":"Khalid Ansari","patientId":"204", "fromEstName":"Khoula","toEstName":"Nadha","respStatus":"Pending", "refStatus":"Acitve"},
   ]
   columns = [{ prop: 'onlineId' }, { name: 'Patient Id' }, { name: 'Patient Name' },{ name: 'Reffered from ' }, { name: 'Referred To' }, { name: 'Referral status' }, { name: 'Response Status' }];
-
+  onPageChange(event: any){
+    this.currentPage = event.offset
+    console.log('this.currentPage',this.currentPage)
+  }
   toggleExpandRow(row:any) {
-    console.log('Toggled Expand Row!', row);
+    // console.log('Toggled Expand Row!', row);
     this.table.rowDetail.toggleExpandRow(row);
   }
   onDetailToggle(event:any) {
-    console.log('Detail Toggled', event);
-  }
-  // ng table pagination
-  refreshRows() {
-    this.pageSize = Number(this.pageSize)
-    console.log(this.page, this.pageSize, this.collectionSize)
-    this.filterTableRecords = this._referralRecord.map((row: any, i: number) => ({ id: i + 1, ...row })).slice(
-      (this.page - 1) * this.pageSize,
-      (this.page - 1) * this.pageSize + this.pageSize,
-    );
+    // console.log('Detail Toggled', event);
   }
 
+  async toggleMedDtl(referralData: any){
+    console.log('toggleMedDtl')
+    let onlineId = referralData.onlineId
+    console.log('onlineId',onlineId)
+    const res = await this.axiosService.get({url:`/getMedRefDtlByOnlineId/${onlineId}`})
+    console.log('getMedRefDtlByOnlineId res', res)
+    this.referralDtl = res
+    this.openMedDtl = true
+  }
+  handleToggleMedRef(value: boolean){
+    this.openMedDtl = value
+  }
+
+  
+  async openViewModal(referralData: any){
+    let onlineId = referralData.onlineId
+    console.log('onlineId',onlineId)
+    const res = await this.axiosService.get({url:`/getMedRefDtlByOnlineId/${onlineId}`})
+    console.log('getMedRefDtlByOnlineId res', res)
+    // const viewModalRef = this.modalService.open(ReferralDetailViewComponent,{ centered: true, size: 'xl' });
+    // viewModalRef.componentInstance.referralDtl = res
+  }
 
 }

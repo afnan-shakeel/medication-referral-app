@@ -5,3 +5,14 @@
   line-height: .5;
   border-radius: .2rem;
 }
+
+/*
+bootstrap table theme
+*/
+
+:host ::ng-deep .datatable-body-row {
+  // padding: 0 !important;
+  font-weight: lighter;
+  
+}
+

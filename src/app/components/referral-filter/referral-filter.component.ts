@@ -16,7 +16,7 @@ export class ReferralFilterComponent {
   constructor(private axiosService: AxiosService) { }
   data: any = [];
   establishments: any = [];
-  searchForm = new FormGroup({
+  searchForm: any = new FormGroup({
     fromEst: new FormControl(),
     toEst: new FormControl(),
     patientId: new FormControl(),
@@ -54,7 +54,7 @@ export class ReferralFilterComponent {
   loading = false
   async search() {
     this.loading = true
-    const payload = {
+    const payload: any = {
       "fromEstId": this.searchForm.value.fromEst?.estCode || null,
       "patientId": this.searchForm.value.patientId || null,
       "refStatus": this.searchForm.value.refStatus || null,
@@ -62,6 +62,7 @@ export class ReferralFilterComponent {
       "toEstId": this.searchForm.value.toEst?.estCode || null
     }
     console.log('payload', payload)
+    
     const res = await this.axiosService.post({ url: '/getAllMedRefWithParams', data: payload })
     console.log('getAllMedRefWithParams res', res)
     this.data = res

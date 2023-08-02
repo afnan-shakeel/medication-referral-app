@@ -1,27 +1,17 @@
-<div class="p-2">
-
-  <div>
-    <ngx-datatable #referralTable [rows]="referralRecord" [columns]="columns" [rowHeight]="50" [headerHeight]="50"
-      [columnMode]="'force'" [limit]="10" [footerHeight]="50" [ngClass]="{
-        'bootstrap': true,  
-        'theme-light': true,
-      }">
-      <ngx-datatable-row-wrapper *ngx-datatable-row="let row; columns: columns;" [ngClass]="{
-        'theme-light': true, 
-      }">
-      </ngx-datatable-row-wrapper>
-      <ngx-datatable-row-detail [rowHeight]="100" #referralDetailRow (toggle)="onDetailToggle($event)">
+<div class="mt-n2">
+<div *ngIf="!openMedDtl">
+    <ngx-datatable #referralTable [rows]="referralRecord" [columns]="columns" [rowHeight]="50" [headerHeight]="30"
+      [columnMode]="'force'" [limit]="10" [footerHeight]="30" (page)="onPageChange($event)" [offset]="currentPage" [ngClass]="{ 'bootstrap': true }">
+      <ngx-datatable-row-detail [rowHeight]="60" #referralDetailRow (toggle)="onDetailToggle($event)">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
-          <div style="padding-left:35px;">
+          <div class="p-2" style="margin-left:35px;">
             <!-- <div><strong>Details</strong></div> -->
             <div class="d-flex  justify-content-start">
               <div class="mx-2"><strong>Online Id: </strong>{{ row.onlineId || '-' }}</div>
               <div class="mx-2"><strong>Response Date: </strong>{{ row.responseDate || '-' }}</div>
               <div class="mx-2"><strong>Responed by: </strong>{{ row.respondedBy || '-' }} </div>
               <div class="mx-2"><strong>Response Remarks: </strong>{{ row.respRemarks || '-'}}</div>
-            </div>
 
-            <div class="d-flex justify-content-start">
               <div class="mx-2"><strong>Cancel by: </strong>{{ row.cancelBy || '-' }}</div>
               <div class="mx-2"><strong>Cancel date: </strong>{{ row.cancelDate || '-' }}</div>
               <div class="mx-2"><strong>Cancel Reason: </strong>{{ row.cancelReason || '-' }}</div>
@@ -30,7 +20,6 @@
         </ng-template>
       </ngx-datatable-row-detail>
 
-      <!-- Column Templates -->
       <ngx-datatable-column [width]="30" [resizeable]="false" [sortable]="false" [draggable]="false"
         [canAutoResize]="false">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
@@ -70,72 +59,16 @@
           <div class="text-center"><strong>{{ row.responseStatus }}</strong></div>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Actions" [width]="50">
+      <ngx-datatable-column name="Actions" [width]="30" [resizeable]="false" [sortable]="false">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-          <button class="btn btn-primary btn-xs">view</button>
+          <button class="btn btn-primary btn-xs" (click)="toggleMedDtl(row)">view</button>
         </ng-template>
       </ngx-datatable-column>
 
     </ngx-datatable>
-
-
   </div>
 
-  <div *ngIf="false">
-    <ag-grid-angular style="width: 1050px; height: 500px" class="ag-theme-alpine" [columnDefs]="columnDefs"
-      [defaultColDef]="defaultColDef" [rowData]="referralRecord" [pagination]="true" [paginationAutoPageSize]="true"
-      [paginationPageSize]="xpageSize"></ag-grid-angular>
-  </div>
-
-  <div *ngIf="false">
-    <div class="table-responsive-sm">
-      <table class="table table-sm table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Online ID</th>
-            <th scope="col">Referral From</th>
-            <th scope="col">Referral To</th>
-            <th scope="col">Patient Id</th>
-            <th scope="col">Patient Name</th>
-            <th scope="col">Referral Status</th>
-            <th scope="col">Response Status</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="_referralRecord.length>0">
-          <tr *ngFor="let item of filterTableRecords">
-            <td>{{item.onlineId}}</td>
-            <td>{{item.fromEstName}}</td>
-            <td>{{item.toEstName}}</td>
-            <td>{{item.patientId}}</td>
-            <td>{{item.patientName}}</td>
-            <td>{{item.referralStatus}}</td>
-            <td>{{item.responseStatus}}</td>
-            <td>
-              <button class="btn btn-sm "><i class="fas fa-info"></i></button>
-              <button class="btn btn-sm"><i class="fas fa-edit"></i></button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody *ngIf="_referralRecord.length==0">
-          <tr>
-            <td colspan="8" class="text-center">No Data</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div *ngIf="referralRecord.length>0" class="d-flex justify-content-between p-2">
-      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="refreshRows()" size="sm">
-      </ngb-pagination>
-      <div class="form-group">
-        <select class="form-select form-select-sm" style="width: auto" [(ngModel)]="pageSize"
-          (ngModelChange)="refreshRows()">
-          <option value="2">2 items per page</option>
-          <option value="4">4 items per page</option>
-          <option value="6">6 items per page</option>
-        </select>
-      </div>
-    </div>
+  <div *ngIf="openMedDtl">
+    <app-referral-detail-view (toggleMedRefEvent)="handleToggleMedRef($event)" [referralDtl]="referralDtl"></app-referral-detail-view>
   </div>
 </div>
