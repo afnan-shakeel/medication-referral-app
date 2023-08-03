@@ -1,10 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Observable, OperatorFunction } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { FormsModule, FormGroup, FormControl } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
-import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReferralApi } from 'src/app/services/apis/referral';
+import { FormGroup, FormControl } from '@angular/forms';
 import { AxiosService } from 'src/app/services/axios';
 
 @Component({
@@ -61,7 +58,7 @@ export class ReferralFilterComponent {
       "respStatus": this.searchForm.value.respStatus || null,
       "toEstId": this.searchForm.value.toEst?.estCode || null
     }
-    console.log('payload', payload)
+    console.log('getAllMedRefWithParams payload', payload)
     
     const res = await this.axiosService.post({ url: '/getAllMedRefWithParams', data: payload })
     console.log('getAllMedRefWithParams res', res)
@@ -70,7 +67,6 @@ export class ReferralFilterComponent {
     this.loading = false
   }
   reset() {
-    // Object.keys(this.searchForm.value).forEach((x: string) => { this.searchForm.reset() })
     this.searchForm.reset()
     this.data = []
     this.searchEvent.emit(this.data)

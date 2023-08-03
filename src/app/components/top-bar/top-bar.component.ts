@@ -8,8 +8,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class TopBarComponent {
   @Output() toggleEvent  = new EventEmitter()
   toggleMenu(){
-    
     this.toggleEvent.emit()
-    console.log('event to emit here')
   }
 }

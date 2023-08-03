@@ -26,7 +26,6 @@ export class AxiosService {
         this.errorHandler = errorHandler;
 
         this.axiosClient = axios.create({
-            // timeout: 3000,
             baseURL: 'http://localhost:9002'
         });
     }

@@ -1,47 +1,47 @@
 
-<div class="p-2 mb-n2">
+<div class="px-2 mb-n2">
     <form [formGroup]="searchForm" (ngSubmit)="search()">
         <div class="row mb-2" width="100vw">
             <div class="col-3">
-                <label for="fromEst">Referred From:</label>
-                <input name="fromEst" id="fromEst" type="text" class="form-control form-control-sm"
+                <label for="fromEst"><small>Referred From:</small></label>
+                <input name="fromEst" id="fromEst" type="text" class="form-control input-xs"
                     formControlName="fromEst" [ngbTypeahead]="searchEstablishment" [inputFormatter]="formatter"
                     [resultFormatter]="formatter" />
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <label for="toEst">Referred To:</label>
-                    <input name="toEst" id="toEst" type="text" class="form-control form-control-sm"
+                    <label for="toEst"><small>Referred To:</small></label>
+                    <input name="toEst" id="toEst" type="text" class="form-control input-xs"
                         formControlName="toEst" [ngbTypeahead]="searchEstablishment" [inputFormatter]="formatter"
                         [resultFormatter]="formatter" />
                 </div>
             </div>
             <div class="col-auto">
-                <div class="input-group-sm">
-                    <label for="patientId">Patient Id</label>
-                    <input formControlName="patientId" class="form-control" id="patientId" aria-describedby="emailHelp">
+                <div class="form-group">
+                    <label for="patientId"><small>Patient Id</small></label>
+                    <input formControlName="patientId" class="form-control input-xs" id="patientId">
                 </div>
             </div>
 
             <div class="col-auto">
                 <div class="form-group">
-                    <label for="respStatus">Response Status</label>
-                    <select class="form-select form-select-sm" formControlName="respStatus" id="respStatus">
+                    <label for="respStatus"><small>Response Status</small></label>
+                    <select class="form-select form-select-sm input-xs" formControlName="respStatus" id="respStatus">
                         <option></option>
                         <option *ngFor="let item of responseStatusValues" value={{item.value}}>{{item.title}}</option>
                     </select>
                 </div>
             </div>
             <div class="col-auto">
-                    <label for="refStatus">Referral Status</label>
-                    <select class="form-select form-select-sm" formControlName="refStatus" id="refStatus">
+                    <label for="refStatus"><small>Referral Status</small></label>
+                    <select class="form-select form-select-sm input-xs" formControlName="refStatus" id="refStatus">
                         <option></option>
                         <option *ngFor="let item of referralStatusValues" value={{item.value}}>{{item.title}}</option>
                     </select>
             </div>
             <div class="col-auto mt-4">
-                <button type="button" class="btn btn-sm btn-outline-primary mx-2 ml-auto" (click)="reset()" >Reset</button>
-                <button type="button" class="btn btn-sm btn-primary" (click)="search()">{{loading===false ? "Search" : ""}}
+                <button type="button" class="btn btn-xs btn-outline-primary mx-2 ml-auto" (click)="reset()" >Reset</button>
+                <button type="button" class="btn btn-xs btn-primary" (click)="search()">{{loading===false ? "Search" : ""}}
                     <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 </button>
             </div>

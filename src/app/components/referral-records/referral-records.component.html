@@ -1,7 +1,7 @@
 <div class="mt-n2">
 <div *ngIf="!openMedDtl">
     <ngx-datatable #referralTable [rows]="referralRecord" [columns]="columns" [rowHeight]="50" [headerHeight]="30"
-      [columnMode]="'force'" [limit]="10" [footerHeight]="30" (page)="onPageChange($event)" [offset]="currentPage" [ngClass]="{ 'bootstrap': true }">
+      [columnMode]="'force'" [limit]="10" [footerHeight]="30" (page)="onPageChange($event)" [offset]="currentPage" class="bootstrap">
       <ngx-datatable-row-detail [rowHeight]="60" #referralDetailRow (toggle)="onDetailToggle($event)">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
           <div class="p-2" style="margin-left:35px;">
@@ -31,32 +31,32 @@
 
       <ngx-datatable-column name="Referred From" [width]="120">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-          <strong>{{ row.fromEstName }}</strong>
+          {{ row.fromEstName }}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Referred To" [width]="120">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-          <strong>{{ row.toEstName }}</strong>
+          {{ row.toEstName }}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Patient Id" [width]="30">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-          <strong>{{ row.patientId }}</strong>
+          {{ row.patientId }}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Patient Name" [width]="150">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-          <strong>{{ row.patientName }}</strong>
+          {{ row.patientName }}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Referral Status" [width]="50">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-          <div class="text-center"><strong>{{ row.referralStatus }}</strong></div>
+          <div class="text-center">{{ row.referralStatus }}</div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Response Status" [width]="50">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-          <div class="text-center"><strong>{{ row.responseStatus }}</strong></div>
+          <div class="text-center">{{ row.responseStatus }}</div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Actions" [width]="30" [resizeable]="false" [sortable]="false">
@@ -69,6 +69,6 @@
   </div>
 
   <div *ngIf="openMedDtl">
-    <app-referral-detail-view (toggleMedRefEvent)="handleToggleMedRef($event)" [referralDtl]="referralDtl"></app-referral-detail-view>
+    <app-referral-detail-view (toggleMedRefEvent)="handleToggleMedRef($event)" [selectedRef]="selectedRef" [referralDtl]="referralDtl"></app-referral-detail-view>
   </div>
 </div>

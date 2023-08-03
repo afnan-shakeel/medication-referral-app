@@ -1,26 +1,24 @@
 nav {
-    height: 100vh;
-    // position: relative;
-    // top: 0;
-    // bottom: 0;
-    background-color: #f0f0f0;
-    transition: width 0.3s;
-  }
+  height: 100vh;
+  // position: relative;
+  // top: 0;
+  // bottom: 0;
+  background-color: #f0f0f0;
+  transition: width 0.3s;
+}
 
-  ul{
-    margin-top: 70px;
-  }
-  button.menu-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-  }
+ul {
+  margin-top: 70px;
+}
+
+button.menu-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
 
 
-
-
-.nav-item-custom{
-      /* Set text overflow to ellipsis if it doesn't fit */
+.nav-item-custom {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

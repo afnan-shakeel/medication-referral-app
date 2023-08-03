@@ -9,6 +9,7 @@ export class ReferralDetailViewComponent {
 
   }
   @Input() referralDtl: any;
+  @Input() selectedRef: any;
   @ViewChild('referralDtlTable') table: any;
 
   columns = [{ prop: 'prescriptionId' }, { name: 'prescriptionId' }, { name: 'itemName' },{ name: 'strength ' }, { name: 'strengthDesc' },
@@ -17,17 +18,14 @@ export class ReferralDetailViewComponent {
   ];
 
   toggleExpandRow(row:any) {
-    console.log('Toggled Expand Row!', row);
     this.table.rowDetail.toggleExpandRow(row);
   }
   onDetailToggle(event:any) {
-    console.log('Detail Toggled', event);
+    // console.log('Detail Toggled', event);
   }
+
   @Output() toggleMedRefEvent = new EventEmitter()
   backToMedRef(){
-    console.log('back to med ref')
     this.toggleMedRefEvent.emit(false)
-  }
-  closeModal(){
   }
 }
