@@ -29,6 +29,7 @@ export class ReferralFilterComponent {
 
   ngOnInit(): void {
     this.fetchEstablishments()
+    this.search()
   }
 
   searchEstablishment: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
@@ -50,6 +51,10 @@ export class ReferralFilterComponent {
   }
   loading = false
   async search() {
+    if(true){
+      this.searchEvent.emit()
+      return
+    }
     this.loading = true
     const payload: any = {
       "fromEstId": this.searchForm.value.fromEst?.estCode || null,

@@ -1,5 +1,6 @@
 import { Component, Input, ViewChild, Output } from '@angular/core';
 import { AxiosService } from 'src/app/services/axios';
+import { data } from './data.db'
 
 interface referralData {
   onlineId: number;
@@ -48,6 +49,13 @@ export class ReferralRecordsComponent {
   }
 
   async toggleMedDtl(referralData: any) {
+    if(true){
+      this.referralDtl = data
+      this.selectedRef = referralData
+      this.openMedDtl = true
+      this.refDtlLoader = false
+      return
+    }
     this.refDtlLoader = true
     let onlineId = referralData.onlineId
     const res = await this.axiosService.get({ url: `/getMedRefDtlByOnlineId/${onlineId}` });
